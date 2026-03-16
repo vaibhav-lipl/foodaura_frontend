@@ -1,0 +1,55 @@
+.switch-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.switch-label {
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Switch container */
+.switch {
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  background-color: #d1d5db;
+  transition: background-color 0.2s ease;
+}
+
+/* Thumb */
+.switch-thumb {
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s ease;
+}
+
+/* ON state */
+.switch.on {
+  background-color: #22c55e;
+}
+
+.switch.on .switch-thumb {
+  transform: translateX(20px);
+}
+
+/* OFF state */
+.switch.off {
+  background-color: #d1d5db;
+}
+
+/* Disabled */
+.switch-wrapper.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

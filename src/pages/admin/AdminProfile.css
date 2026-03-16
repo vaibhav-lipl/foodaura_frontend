@@ -1,0 +1,61 @@
+.admin-profile-page {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.admin-profile-page .page-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1f2937; /* dark gray */
+}
+
+/* Card spacing */
+.admin-profile-page .card {
+  margin-bottom: 24px;
+}
+
+/* Section headings */
+.admin-profile-page h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+/* Inputs spacing */
+.admin-profile-page .input-group {
+  margin-bottom: 16px;
+}
+
+/* Buttons */
+.admin-profile-page button {
+  margin-top: 8px;
+}
+
+/* Change password button */
+.admin-profile-page button.warning {
+  background-color: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.admin-profile-page button.warning:hover {
+  background-color: #d97706;
+  border-color: #d97706;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-profile-page {
+    padding: 16px;
+  }
+
+  .admin-profile-page .page-title {
+    font-size: 20px;
+  }
+
+  .admin-profile-page h2 {
+    font-size: 16px;
+  }
+}

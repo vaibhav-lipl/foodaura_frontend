@@ -1,0 +1,36 @@
+.restaurant-statistics-page {
+  padding: 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.section-title {
+  margin-bottom: 15px;
+}
+
+.top-items-list {
+  list-style: none;
+  padding: 0;
+}
+
+.top-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.no-data {
+  color: #888;
+}

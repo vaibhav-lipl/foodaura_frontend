@@ -1,0 +1,151 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.75rem;
+  border-radius: 5px !important;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  line-height: 1;
+  min-height: 24px;
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+}
+
+/* Active/Inactive Status */
+.status-badge.status-active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.status-badge.status-inactive {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+/* Order Status */
+.status-badge.status-pending {
+  background: linear-gradient(135deg, var(--warning) 0%, #f59e0b 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+}
+
+.status-badge.status-confirmed {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.status-badge.status-preparing {
+  background: linear-gradient(135deg, var(--primary) 0%, #e12364 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(225, 35, 100, 0.3);
+}
+
+.status-badge.status-ready {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.status-badge.status-out-for-delivery {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+}
+
+.status-badge.status-delivered {
+  background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);
+}
+
+.status-badge.status-cancelled {
+  background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+}
+
+/* Payment Status */
+.status-badge.status-paid {
+  background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);
+}
+
+.status-badge.status-failed {
+  background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+}
+
+/* Availability Status */
+.status-badge.status-available {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);
+}
+
+.status-badge.status-unavailable {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+}
+/* Item Type Status */
+.status-badge.status-veg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.3);
+}
+
+.status-badge.status-nonveg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.status-badge.status-jain {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+}
+
+/* Restaurant Status - Open/Closed */
+.status-badge.status-open {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.status-badge.status-closed {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+/* Default/Unknown Status */
+.status-badge.status-default {
+  background: linear-gradient(135deg, var(--secondary) 0%, #1f2937 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(31, 41, 55, 0.3);
+}

@@ -1,0 +1,331 @@
+.statistics-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: var(--spacing-md);
+}
+
+.retry-button {
+  margin-top: var(--spacing-md);
+}
+
+.date-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  align-items: end;
+}
+
+.date-filter-button {
+  display: flex;
+  align-items: flex-end;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.metric-icon {
+  font-size: 1.5rem;
+}
+
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+/* Ratings & Reviews */
+.ratings-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.ratings-summary {
+  text-align: center;
+}
+
+.ratings-average {
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-600);
+  margin-bottom: var(--spacing-sm);
+}
+
+.ratings-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.star {
+  font-size: 1.5rem;
+}
+
+.star-filled {
+  color: var(--warning-500);
+}
+
+.star-empty {
+  color: var(--border-medium);
+}
+
+.ratings-count {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.ratings-distribution {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.distribution-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.distribution-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.distribution-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  width: 2rem;
+}
+
+.distribution-bar-container {
+  flex: 1;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  height: 1rem;
+  overflow: hidden;
+}
+
+.distribution-bar {
+  background: var(--primary-500);
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-normal);
+}
+
+.distribution-count {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  width: 3rem;
+  text-align: right;
+}
+
+.reviews-section {
+  margin-top: var(--spacing-xl);
+}
+
+.reviews-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+.review-item {
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.review-author {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.review-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.review-star {
+  font-size: var(--font-size-sm);
+}
+
+.review-comment {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.review-date {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+/* Most Sold Items */
+.sold-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.sold-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+}
+
+.sold-item-card:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.sold-item-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.sold-item-rank {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  background: rgba(225, 35, 100, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-600);
+}
+
+.sold-item-name {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.sold-item-quantity {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.sold-item-revenue {
+  text-align: right;
+}
+
+.sold-item-revenue-value {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.sold-item-revenue-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* Orders by Status & Daily Sales */
+.status-list,
+.sales-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.status-item,
+.sales-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+}
+
+.status-item:hover,
+.sales-item:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.status-label {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+.status-count {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-600);
+}
+
+.sales-date {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.sales-orders {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.sales-amount {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-600);
+}
+
+@media (max-width: 1024px) {
+  .statistics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .date-filter-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
