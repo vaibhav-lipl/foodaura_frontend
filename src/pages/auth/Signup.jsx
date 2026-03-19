@@ -166,18 +166,19 @@ const Signup = () => {
           
           <div className="auth-header">
             <div className="auth-logo">
-              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="32" rx="8" fill="url(#auth-logo-gradient)" />
-                <path d="M8 12L16 8L24 12V20L16 24L8 20V12Z" stroke="white" strokeWidth="2" strokeLinejoin="round" />
-                <path d="M16 14L16 24" stroke="white" strokeWidth="2" />
-                <path d="M8 12L16 16L24 12" stroke="white" strokeWidth="2" />
-                <defs>
-                  <linearGradient id="auth-logo-gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#e12364" />
-                    <stop offset="1" stopColor="#c91a5a" />
-                  </linearGradient>
-                </defs>
-              </svg>
+                {/* <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="32" height="32" rx="8" fill="url(#auth-logo-gradient)" />
+                  <path d="M8 12L16 8L24 12V20L16 24L8 20V12Z" stroke="white" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M16 14L16 24" stroke="white" strokeWidth="2" />
+                  <path d="M8 12L16 16L24 12" stroke="white" strokeWidth="2" />
+                  <defs>
+                    <linearGradient id="auth-logo-gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#e12364" />
+                      <stop offset="1" stopColor="#c91a5a" />
+                    </linearGradient>
+                  </defs>
+                </svg> */}
+              <img src="/foodaura_logo.png" alt="FoodAura Logo" className="logo-image logo-icon" />
             </div>
             <h1 className="auth-title">
               {step === 1 ? 'Create Account' : 'Restaurant Setup'}

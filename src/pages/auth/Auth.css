@@ -83,7 +83,7 @@
 .auth-logo {
   width: 64px;
   height: 64px;
-  margin: 0 auto var(--spacing-lg);
+  margin: 0 auto var(--spacing-sm);
 }
 
 .auth-logo svg {

@@ -98,9 +98,11 @@
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
+  width: 55px;
+  height: 55px;
   flex-shrink: 0;
+  background-color: #FFF;
+  border-radius: var(--radius-full);
 }
 
 .logo-icon svg {

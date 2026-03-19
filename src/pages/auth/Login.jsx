@@ -105,7 +105,7 @@ const Login = () => {
           
           <div className="auth-header">
             <div className="auth-logo">
-              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="32" height="32" rx="8" fill="url(#auth-logo-gradient)" />
                 <path d="M8 12L16 8L24 12V20L16 24L8 20V12Z" stroke="white" strokeWidth="2" strokeLinejoin="round" />
                 <path d="M16 14L16 24" stroke="white" strokeWidth="2" />
@@ -116,7 +116,8 @@ const Login = () => {
                     <stop offset="1" stopColor="#c91a5a" />
                   </linearGradient>
                 </defs>
-              </svg>
+              </svg> */}
+              <img src="/foodaura_logo.png" alt="FoodAura Logo" className="logo-image logo-icon" />
             </div>
             <h1 className="auth-title">Welcome Back</h1>
             <p className="auth-subtitle">Sign in to continue to FoodAura</p>
