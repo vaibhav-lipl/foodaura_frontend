@@ -34,6 +34,8 @@ import AdminUsers from '../pages/admin/AdminUsers';
 import AdminRestaurants from '../pages/admin/AdminRestaurants';
 import AdminDeliveryPartners from '../pages/admin/AdminDeliveryPartners';
 import AdminDeliveryPartnerDetails from '../pages/admin/AdminDeliveryPartnerDetails';
+import AdminFaqs from '../pages/admin/AdminFaqs';
+import AdminSupportTickets from '../pages/admin/AdminSupportTickets';
 
 const AppRoutes = () => {
   const { isAuthenticated, loading, isAdmin } = useAuth();
@@ -183,6 +185,26 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/admin/faqs"
+        element={
+          <ProtectedRoute requireAdmin={true}>
+            <Layout>
+              <AdminFaqs />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/support-tickets"
+        element={
+          <ProtectedRoute requireAdmin={true}>
+            <Layout>
+              <AdminSupportTickets />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
 
 
       {/* Restaurant Routes */}
@@ -279,4 +301,3 @@ const AppRoutes = () => {
 };
 
 export default AppRoutes;
-

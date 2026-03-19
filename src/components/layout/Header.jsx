@@ -111,6 +111,13 @@ const Header = ({ onMenuClick }) => {
   }, [user, isNotificationOpen]);
 
   const unreadCount = notifications.filter((n) => !n.isRead).length;
+  const restaurantImage =
+    user?.restaurant?.imageUrl ||
+    user?.restaurant?.restaurantImage ||
+    user?.imageUrl ||
+    user?.restaurantImage ||
+    '';
+  const avatarFallback = user?.name?.charAt(0)?.toUpperCase() || '?';
 
   const handleLogout = () => {
     logout();
@@ -208,7 +215,15 @@ const Header = ({ onMenuClick }) => {
                 }
               >
                 <div className="avatar avatar-sm">
-                  {user?.name?.charAt(0).toUpperCase()}
+                  {restaurantImage ? (
+                    <img
+                      src={restaurantImage}
+                      alt={user?.name || 'Restaurant'}
+                      className="avatar-image"
+                    />
+                  ) : (
+                    avatarFallback
+                  )}
                 </div>
                 <div className="profile-info">
                   <span className="profile-name">
@@ -225,7 +240,15 @@ const Header = ({ onMenuClick }) => {
                 (<div className="dropdown-menu">
                   <div className="dropdown-header">
                     <div className="avatar">
-                      {user?.name?.charAt(0).toUpperCase()}
+                      {restaurantImage ? (
+                        <img
+                          src={restaurantImage}
+                          alt={user?.name || 'Restaurant'}
+                          className="avatar-image"
+                        />
+                      ) : (
+                        avatarFallback
+                      )}
                     </div>
                     <div>
                       <p className="dropdown-user-name">{user.name}</p>

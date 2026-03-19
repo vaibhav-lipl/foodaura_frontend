@@ -91,6 +91,18 @@ const ROUTE_SEO = [
       'Review platform-wide order activity, statuses, and order details from the FoodAura admin panel.',
   },
   {
+    match: /^\/admin\/faqs$/,
+    title: 'Admin FAQ Management | FoodAura',
+    description:
+      'Create FAQ modules, manage help content, and organize support answers for customers and delivery partners in FoodAura.',
+  },
+  {
+    match: /^\/admin\/support-tickets$/,
+    title: 'Admin Support Tickets | FoodAura',
+    description:
+      'Review support issues, reply to customers and delivery partners, and update ticket statuses from the FoodAura admin panel.',
+  },
+  {
     match: /^\/admin\/profile$/,
     title: 'Admin Profile | FoodAura',
     description:

@@ -8,14 +8,14 @@ import {
   BarChart3,
   X,
   Users,
-  Shield,
-  Ship,
   Truck,
+  CircleHelp,
+  LifeBuoy,
 } from 'lucide-react';
 import './Sidebar.css';
 
 const Sidebar = ({ isOpen, onClose, isCollapsed = false }) => {
-  const { user, isAdmin, isRestaurant } = useAuth();
+  const { isAdmin } = useAuth();
 
   // Admin menu items
   const adminMenuItems = [
@@ -35,6 +35,13 @@ const Sidebar = ({ isOpen, onClose, isCollapsed = false }) => {
         { icon: ShoppingCart, label: 'Orders', path: '/admin/orders' },
       ],
     },
+    {
+      section: 'Support',
+      items: [
+        { icon: CircleHelp, label: 'FAQs', path: '/admin/faqs' },
+        { icon: LifeBuoy, label: 'Support Tickets', path: '/admin/support-tickets' },
+      ],
+    }
   ];
 
   // Restaurant menu items

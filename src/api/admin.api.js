@@ -98,7 +98,85 @@ export const adminAPI = {
   getDeliveryPartnerById: async (partnerId) => {
     const response = await axiosInstance.get(`/admin/delivery-partners/${partnerId}`);
     return response.data;
-  }
+  },
+
+  // FAQ Modules
+  getFaqModules: async () => {
+    const response = await axiosInstance.get('/admin/faq-modules');
+    return response.data;
+  },
+
+  createFaqModule: async (payload) => {
+    const response = await axiosInstance.post('/admin/faq-modules', payload);
+    return response.data;
+  },
+
+  updateFaqModule: async (moduleId, payload) => {
+    const response = await axiosInstance.put(`/admin/faq-modules/${moduleId}`, payload);
+    return response.data;
+  },
+
+  deleteFaqModule: async (moduleId) => {
+    const response = await axiosInstance.delete(`/admin/faq-modules/${moduleId}`);
+    return response.data;
+  },
+
+  // FAQs
+  getFaqs: async (params = {}) => {
+    const queryParams = new URLSearchParams();
+    if (params.user_type) queryParams.append('user_type', params.user_type);
+    if (params.moduleId) queryParams.append('moduleId', params.moduleId);
+    if (params.module) queryParams.append('module', params.module);
+
+    const queryString = queryParams.toString();
+    const url = `/admin/faqs${queryString ? `?${queryString}` : ''}`;
+    const response = await axiosInstance.get(url);
+    return response.data;
+  },
+
+  createFaq: async (payload) => {
+    const response = await axiosInstance.post('/admin/faqs', payload);
+    return response.data;
+  },
+
+  updateFaq: async (faqId, payload) => {
+    const response = await axiosInstance.put(`/admin/faqs/${faqId}`, payload);
+    return response.data;
+  },
+
+  deleteFaq: async (faqId) => {
+    const response = await axiosInstance.delete(`/admin/faqs/${faqId}`);
+    return response.data;
+  },
+
+  // Support Tickets
+  getSupportTickets: async (params = {}) => {
+    const queryParams = new URLSearchParams();
+    if (params.status) queryParams.append('status', params.status);
+    if (params.user_type) queryParams.append('user_type', params.user_type);
+    if (params.search) queryParams.append('search', params.search);
+    if (params.page) queryParams.append('page', params.page);
+    if (params.limit) queryParams.append('limit', params.limit);
+
+    const queryString = queryParams.toString();
+    const url = `/admin/support-tickets${queryString ? `?${queryString}` : ''}`;
+    const response = await axiosInstance.get(url);
+    return response.data;
+  },
+
+  getSupportTicketById: async (ticketId) => {
+    const response = await axiosInstance.get(`/admin/support-tickets/${ticketId}`);
+    return response.data;
+  },
+
+  replyToSupportTicket: async (ticketId, payload) => {
+    const response = await axiosInstance.post(`/admin/support-tickets/${ticketId}/reply`, payload);
+    return response.data;
+  },
+
+  updateSupportTicketStatus: async (ticketId, payload) => {
+    const response = await axiosInstance.put(`/admin/support-tickets/${ticketId}/status`, payload);
+    return response.data;
+  },
 
 };
-

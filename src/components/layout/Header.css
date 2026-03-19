@@ -221,6 +221,17 @@
   color: var(--danger-700);
 }
 
+.avatar {
+  overflow: hidden;
+}
+
+.avatar-image {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  display: block;
+}
+
 /* Notification Wrapper */
 .notification-wrapper {
   position: relative;
@@ -332,4 +343,3 @@
     transform: translateY(0);
   }
 }
-

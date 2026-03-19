@@ -24,6 +24,16 @@ const StatusBadge = ({ status, type = 'order', label }) => {
       return configs[status?.toLowerCase()] || { label: status, className: 'status-default' };
     }
 
+    if (type === 'support_ticket') {
+      const configs = {
+        open: { label: 'Open', className: 'status-open' },
+        in_progress: { label: 'In Progress', className: 'status-in-progress' },
+        resolved: { label: 'Resolved', className: 'status-resolved' },
+        closed: { label: 'Closed', className: 'status-closed' },
+      };
+      return configs[status?.toLowerCase()] || { label: status, className: 'status-default' };
+    }
+
     if (type === 'availability') {
       return status
         ? { label: 'Available', className: 'status-available' }

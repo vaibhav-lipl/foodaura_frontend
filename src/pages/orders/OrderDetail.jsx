@@ -92,8 +92,6 @@ const OrderDetail = () => {
       { value: 'assigned', label: 'Assigned' },
       { value: 'preparing', label: 'Preparing' },
       { value: 'ready', label: 'Ready' },
-      { value: 'out_for_delivery', label: 'Out for Delivery' },
-      { value: 'delivered', label: 'Delivered' },
       { value: 'cancelled', label: 'Cancelled' },
     ];
 
@@ -113,8 +111,8 @@ const OrderDetail = () => {
         return allStatuses.filter(s => s.value === 'ready');
       }
       if (currentStatus === 'assigned') {
-        // Restaurant can't update beyond assigned
-        return allStatuses;
+        // Restaurant can only prepare and ready the status, but can't update assigned status
+        return allStatuses.filter(s => s.value === 'preparing' || s.value === 'ready');
       }
       if (currentStatus === 'ready') {
         // Restaurant can't update beyond ready
