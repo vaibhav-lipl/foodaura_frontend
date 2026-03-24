@@ -14,7 +14,7 @@ import Button from '../../components/common/Button';
 import Select from '../../components/common/Select';
 import Textarea from '../../components/common/Textarea';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import StatusBadge from '../../components/common/StatusBadge';
 import './AdminSupportTickets.css';
 
@@ -98,6 +98,8 @@ const AdminSupportTickets = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const threadEndRef = useRef(null);
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchTickets();
@@ -298,9 +300,6 @@ const AdminSupportTickets = () => {
           <p className="page-subtitle">Review user issues, manage ticket status, and send admin replies</p>
         </div>
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-      {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
       <div className="support-stats-grid">
         <Card className="support-stat-card">

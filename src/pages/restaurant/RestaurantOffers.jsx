@@ -8,7 +8,7 @@ import Textarea from '../../components/common/Textarea';
 import Select from '../../components/common/Select';
 import StatusBadge from '../../components/common/StatusBadge';
 import Modal from '../../components/common/Modal';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import Loading from '../../components/common/Loading';
 import { formatCurrency } from '../../utils/format';
 import ImageUpload from '../../components/common/ImageUpload';
@@ -39,6 +39,8 @@ const RestaurantOffers = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchOffers();
@@ -120,7 +122,6 @@ const RestaurantOffers = () => {
     }
   };
 
-
   const discountTypeOptions = [
     { value: 'percentage', label: 'Percentage' },
     { value: 'fixed', label: 'Fixed Amount' }
@@ -149,9 +150,6 @@ const RestaurantOffers = () => {
         </div>
         <Button onClick={handleOpenModal}>Create Offer</Button>
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-      {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
       {loading ? (
         <Card>

@@ -5,7 +5,7 @@ import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import { formatTime } from '../../utils/format';
 import './RestaurantSchedule.css';
 
@@ -32,6 +32,8 @@ const RestaurantSchedule = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchSchedule();
@@ -118,9 +120,6 @@ const RestaurantSchedule = () => {
           <p className="page-subtitle">Set your restaurant operating hours</p>
         </div>
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-      {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
       <Card>
         <form onSubmit={handleSubmit} className="schedule-form">

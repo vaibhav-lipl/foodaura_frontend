@@ -3,7 +3,7 @@ import Card from '../../components/common/Card';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import Switch from '../../components/common/Switch';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import Loading from '../../components/common/Loading';
 import { adminAPI } from '../../api/admin.api';
 import './AdminSettings.css';
@@ -13,6 +13,8 @@ const AdminSettings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchSettings();
@@ -45,9 +47,6 @@ const AdminSettings = () => {
   return (
     <div className="admin-settings-page">
       <h1 className="page-title">Admin Settings</h1>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-      {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
       {/* General Settings */}
       <Card>

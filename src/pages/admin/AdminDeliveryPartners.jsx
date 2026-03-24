@@ -6,11 +6,10 @@ import Input from '../../components/common/Input';
 import Select from '../../components/common/Select';
 import StatusBadge from '../../components/common/StatusBadge';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import { Search, User, Phone, Mail, ToggleLeft, ToggleRight, Eye } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './AdminDeliveryPartners.css';
-
 
 const AdminDeliveryPartners = () => {
     const navigate = useNavigate();
@@ -25,7 +24,9 @@ const AdminDeliveryPartners = () => {
         limit: 20,
     });
 
-    useEffect(() => {
+    useToastNotifications({ error, success, setError, setSuccess });
+
+  useEffect(() => {
         fetchDeliveryPartners();
     }, [filters]);
 
@@ -75,14 +76,11 @@ const AdminDeliveryPartners = () => {
         }
     };
 
-
-
     const statusOptions = [
         { label: 'Approved', value: 'active' },
         { label: 'Pending', value: 'inactive' },
         { label: 'Suspended', value: 'suspended' },
     ];
-
 
     if (loading && deliveryPartners.length === 0) {
         return (
@@ -100,9 +98,6 @@ const AdminDeliveryPartners = () => {
                     <p className="page-subtitle">Manage delivery partners and approvals</p>
                 </div>
             </div>
-
-            {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-            {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
             {/* Filters */}
             <Card className="filters-card">

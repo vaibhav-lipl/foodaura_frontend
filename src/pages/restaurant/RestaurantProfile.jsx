@@ -7,7 +7,7 @@ import Input from '../../components/common/Input';
 import Textarea from '../../components/common/Textarea';
 import ImageUpload from '../../components/common/ImageUpload';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import './RestaurantProfile.css';
 
 const RestaurantProfile = () => {
@@ -28,6 +28,8 @@ const RestaurantProfile = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchProfile();
@@ -145,9 +147,6 @@ const RestaurantProfile = () => {
           </Link>
         </div>
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-      {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
       <Card>
         <form onSubmit={handleSubmit} className="profile-form">

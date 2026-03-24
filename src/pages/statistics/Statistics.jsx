@@ -6,6 +6,7 @@ import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import Loading from '../../components/common/Loading';
 import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import { formatCurrency } from '../../utils/format';
 import './Statistics.css';
 
@@ -16,6 +17,11 @@ const Statistics = () => {
   const [dateRange, setDateRange] = useState({
     startDate: new Date(new Date().setDate(1)).toISOString().split('T')[0], // First day of current month
     endDate: new Date().toISOString().split('T')[0], // Today
+  });
+
+  useToastNotifications({
+    error,
+    setError: stats ? setError : undefined,
   });
 
   useEffect(() => {
@@ -79,8 +85,6 @@ const Statistics = () => {
           <p className="page-subtitle">View your restaurant performance metrics</p>
         </div>
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
 
       {/* Date Range Filter */}
       <Card>

@@ -8,10 +8,9 @@ import StatusBadge from '../../components/common/StatusBadge';
 import Select from '../../components/common/Select';
 import Input from '../../components/common/Input';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import { formatCurrency, formatDateTime } from '../../utils/format';
 import { useAuth } from '../../store/AuthContext';
-import { Toaster, toast } from 'react-hot-toast';
 
 import './Orders.css';
 
@@ -20,6 +19,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const { isRestaurant } = useAuth();
   const [filters, setFilters] = useState({
     status: '',
@@ -49,8 +49,9 @@ const Orders = () => {
     }
   };
 
-
   const [pagination, setPagination] = useState(null);
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchOrders();
@@ -81,10 +82,12 @@ const Orders = () => {
 
   const handleInlineStatusUpdate = async (orderId, newStatus) => {
     try {
+      setError('');
+      setSuccess('');
       const response = await ordersAPI.updateOrderStatus(orderId, newStatus);
 
       if (response.success) {
-        toast.success('Order status updated successfully');
+        setSuccess('Order status updated successfully');
         setOrders(prev =>
           prev.map(o =>
             o.id === orderId
@@ -94,10 +97,9 @@ const Orders = () => {
         );
       }
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to update status');
+      setError(err.response?.data?.message || 'Failed to update status');
     }
   };
-
 
   const handleStatusFilter = (e) => {
     setFilters({ ...filters, status: e.target.value, page: 1 });
@@ -117,7 +119,6 @@ const Orders = () => {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   };
-
 
   const statusOptions = [
     { value: '', label: 'All Statuses' },
@@ -142,15 +143,6 @@ const Orders = () => {
         </div>
       </div>
 
-      <>
-        <Toaster position="top-right" reverseOrder={false} />
-        {/* rest of app */}
-      </>
-
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-
-      {/* Filters */}
       <Card>
         <div className="filters-grid">
           <Select
@@ -163,7 +155,6 @@ const Orders = () => {
         </div>
       </Card>
 
-      {/* Orders Table */}
       <Card title={`Orders (${pagination?.total || 0})`}>
         {loading ? (
           <div className="loading-container">
@@ -208,7 +199,6 @@ const Orders = () => {
                                 label: formatStatusLabel(s.value)
                               }))
                             ]}
-
                           />
                         ) : (
                           <StatusBadge status={order.status} />
@@ -243,9 +233,7 @@ const Orders = () => {
                             View
                             <ArrowRight size={14} />
                           </Button>
-                        )
-                        }
-
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -253,7 +241,6 @@ const Orders = () => {
               </table>
             </div>
 
-            {/* Pagination */}
             {pagination && pagination.pages > 1 && (
               <div className="pagination">
                 <div className="pagination-info">

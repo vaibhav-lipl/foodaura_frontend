@@ -6,7 +6,7 @@ import Input from '../../components/common/Input';
 import Select from '../../components/common/Select';
 import StatusBadge from '../../components/common/StatusBadge';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import { Search, Store, MapPin, Phone, Mail, ChefHat, ToggleLeft, ToggleRight } from 'lucide-react';
 import './AdminRestaurants.css';
 
@@ -22,6 +22,8 @@ const AdminRestaurants = () => {
     page: 1,
     limit: 20,
   });
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchRestaurants();
@@ -98,9 +100,6 @@ const AdminRestaurants = () => {
           <p className="page-subtitle">Manage restaurants and their status</p>
         </div>
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-      {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
       {/* Filters */}
       <Card className="filters-card">

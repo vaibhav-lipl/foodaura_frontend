@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { adminAPI } from '../../api/admin.api';
 import Card from '../../components/common/Card';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import Loading from '../../components/common/Loading';
 import './AdminProfile.css';
 import { useAuth } from '../../store/AuthContext';
@@ -16,12 +16,13 @@ const AdminProfile = () => {
   const [success, setSuccess] = useState('');
   
 
+  useToastNotifications({ error, success, setError, setSuccess });
+
   const [passwordData, setPasswordData] = useState({
     oldPassword: '',
     newPassword: '',
     confirmPassword: '',
   });
-
 
   const handleProfileUpdate = async () => {
     try {
@@ -50,13 +51,9 @@ const AdminProfile = () => {
     }
   };
 
-
   return (
     <div className="admin-profile-page">
       <h1 className="page-title">Admin Profile</h1>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-      {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
       {/* Profile Info */}
       <Card>

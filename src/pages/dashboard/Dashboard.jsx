@@ -8,6 +8,7 @@ import Button from '../../components/common/Button';
 import StatusBadge from '../../components/common/StatusBadge';
 import Loading from '../../components/common/Loading';
 import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import { formatCurrency, formatDateTime } from '../../utils/format';
 import './Dashboard.css';
 
@@ -16,7 +17,15 @@ const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [toggling, setToggling] = useState(false);
+
+  useToastNotifications({
+    error,
+    success,
+    setError: dashboardData ? setError : undefined,
+    setSuccess,
+  });
 
   useEffect(() => {
     fetchDashboard();
@@ -42,13 +51,15 @@ const Dashboard = () => {
   const handleToggleStatus = async () => {
     try {
       setToggling(true);
+      setError('');
+      setSuccess('');
       const response = await dashboardAPI.toggleRestaurantStatus();
       if (response.success) {
-        // Update restaurant status in local state
         setDashboardData((prev) => ({
           ...prev,
           restaurant: response.data.restaurant,
         }));
+        setSuccess(`Restaurant ${response.data.restaurant?.isOpen ? 'opened' : 'closed'} successfully`);
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to toggle restaurant status');
@@ -80,7 +91,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-page">
-      {/* Header */}
       <div className="page-header">
         <div>
           <h1 className="page-title">Dashboard</h1>
@@ -89,7 +99,6 @@ const Dashboard = () => {
           </p>
         </div>
 
-        {/* Restaurant Status Toggle */}
         <div className="header-actions">
           <div className="status-badge-wrapper">
             <span className="status-label">Status:</span>
@@ -107,11 +116,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {error && (
-        <Alert type="error" message={error} onClose={() => setError('')} />
-      )}
-
-      {/* Metrics Cards */}
       <div className="metrics-grid">
         <MetricCard
           title="Today's Sales"
@@ -137,7 +141,6 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* Recent Orders */}
       <Card title="Recent Orders" actions={
           <Button variant="outline" size="sm" onClick={() => navigate('/orders')}>
             View All
@@ -212,4 +215,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-

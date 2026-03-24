@@ -17,7 +17,7 @@ import Select from '../../components/common/Select';
 import Textarea from '../../components/common/Textarea';
 import Modal from '../../components/common/Modal';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import './AdminFaqs.css';
 
 const NEW_MODULE_VALUE = '__new__';
@@ -96,6 +96,8 @@ const AdminFaqs = () => {
   const [editingModule, setEditingModule] = useState(null);
   const [faqForm, setFaqForm] = useState(EMPTY_FAQ_FORM);
   const [moduleForm, setModuleForm] = useState(EMPTY_MODULE_FORM);
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchInitialData();
@@ -438,9 +440,6 @@ const AdminFaqs = () => {
           </Button>
         </div>
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-      {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
       <div className="faq-stats-grid">
         <Card className="faq-stat-card">

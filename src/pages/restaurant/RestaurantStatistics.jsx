@@ -3,7 +3,7 @@ import { restaurantAPI } from '../../api/restaurant.api';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import './RestaurantStatistics.css';
 
 const RestaurantStatistics = () => {
@@ -11,6 +11,8 @@ const RestaurantStatistics = () => {
   const [range, setRange] = useState('week');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  useToastNotifications({ error, setError });
 
   useEffect(() => {
     fetchStatistics();
@@ -74,8 +76,6 @@ const RestaurantStatistics = () => {
           </Button>
         </div>
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
 
       {statistics && (
         <>

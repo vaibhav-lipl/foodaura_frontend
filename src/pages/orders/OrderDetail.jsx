@@ -9,8 +9,8 @@ import StatusBadge from '../../components/common/StatusBadge';
 import Select from '../../components/common/Select';
 import Loading from '../../components/common/Loading';
 import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import { formatCurrency, formatDateTime } from '../../utils/format';
-import { Toaster, toast } from 'react-hot-toast';
 import './OrderDetail.css';
 
 const OrderDetail = () => {
@@ -21,7 +21,15 @@ const OrderDetail = () => {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [status, setStatus] = useState('');
+
+  useToastNotifications({
+    error,
+    success,
+    setError: order ? setError : undefined,
+    setSuccess,
+  });
 
   useEffect(() => {
     fetchOrder();
@@ -49,11 +57,11 @@ const OrderDetail = () => {
     try {
       setUpdating(true);
       setError('');
+      setSuccess('');
       const response = await ordersAPI.updateOrderStatus(id, status);
       if (response.success) {
         setOrder(response.data.order);
-        setError('');
-        toast.success('Order status updated successfully');
+        setSuccess('Order status updated successfully');
       } else {
         setError('Failed to update order status');
       }
@@ -84,7 +92,6 @@ const OrderDetail = () => {
     );
   }
 
-  // Get available status options based on user role and current order status
   const getStatusOptions = () => {
     const allStatuses = [
       { value: 'pending', label: 'Pending' },
@@ -95,13 +102,10 @@ const OrderDetail = () => {
       { value: 'cancelled', label: 'Cancelled' },
     ];
 
-    // If restaurant role, only allow status updates from confirmed to ready
     if (isRestaurant && order) {
       const restaurantAllowedStatuses = ['confirmed', 'preparing', 'ready'];
       const currentStatus = order.status?.toLowerCase();
 
-      // Only show statuses that restaurant can update to
-      // Restaurant can update from confirmed → preparing → ready
       if (currentStatus === 'pending' || currentStatus === 'confirmed') {
         return allStatuses.filter(s =>
           restaurantAllowedStatuses.includes(s.value) && s.value !== 'pending'
@@ -111,18 +115,14 @@ const OrderDetail = () => {
         return allStatuses.filter(s => s.value === 'ready');
       }
       if (currentStatus === 'assigned') {
-        // Restaurant can only prepare and ready the status, but can't update assigned status
         return allStatuses.filter(s => s.value === 'preparing' || s.value === 'ready');
       }
       if (currentStatus === 'ready') {
-        // Restaurant can't update beyond ready
         return [];
       }
-      // For any other status, restaurant can't update
       return [];
     }
 
-    // For admin or other roles, show all statuses
     return allStatuses;
   };
 
@@ -140,10 +140,7 @@ const OrderDetail = () => {
         </div>
       </div>
 
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-
       <div className="order-detail-grid">
-        {/* Order Details */}
         <div className="order-detail-main">
           <Card title="Order Information">
             <div className="info-grid">
@@ -206,7 +203,6 @@ const OrderDetail = () => {
           </Card>
         </div>
 
-        {/* Order Summary & Actions */}
         <div className="order-detail-sidebar">
           <Card title="Order Summary">
             <div className="summary-list">
@@ -262,7 +258,6 @@ const OrderDetail = () => {
           {isRestaurant && statusOptions.length === 0 && (
             <Card title="Status Update">
               <div className="status-info">
-
                 {order.status !== 'delivered' && (
                   <>
                     <p className="status-info-text">
@@ -279,11 +274,9 @@ const OrderDetail = () => {
                     This order has been delivered to the customer.
                   </p>
                 )}
-
               </div>
             </Card>
           )}
-
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import Textarea from '../../components/common/Textarea';
 import Select from '../../components/common/Select';
 import ImageUpload from '../../components/common/ImageUpload';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import Toggle from '../../components/common/Toggle';
 import { formatCurrency } from '../../utils/format';
 import { useAuth } from '../../store/AuthContext';
@@ -72,6 +72,7 @@ const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const { isRestaurant } = useAuth();
@@ -79,6 +80,8 @@ const Menu = () => {
   const [menuImage, setMenuImage] = useState(null);
   const [currentImageUrl, setCurrentImageUrl] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchMenuItems();
@@ -114,7 +117,7 @@ const Menu = () => {
         preparationTime: item.preparationTime || '',
       });
       setCurrentImageUrl(item.imageUrl || null);
-      setMenuImage(null); // Reset new image file
+      setMenuImage(null);
     } else {
       setEditingItem(null);
       setFormData({ ...DEFAULT_FORM_DATA });
@@ -145,6 +148,7 @@ const Menu = () => {
     try {
       setSubmitting(true);
       setError('');
+      setSuccess('');
 
       const submitData = {
         ...formData,
@@ -156,6 +160,7 @@ const Menu = () => {
       if (editingItem) {
         const response = await menuAPI.updateMenuItem(editingItem.id, submitData, menuImage);
         if (response.success) {
+          setSuccess('Menu item updated successfully');
           await fetchMenuItems();
           handleCloseModal();
         } else {
@@ -164,6 +169,7 @@ const Menu = () => {
       } else {
         const response = await menuAPI.createMenuItem(submitData, menuImage);
         if (response.success) {
+          setSuccess('Menu item created successfully');
           await fetchMenuItems();
           handleCloseModal();
         } else {
@@ -184,8 +190,10 @@ const Menu = () => {
 
     try {
       setError('');
+      setSuccess('');
       const response = await menuAPI.deleteMenuItem(id);
       if (response.success) {
+        setSuccess('Menu item deleted successfully');
         await fetchMenuItems();
       } else {
         setError('Failed to delete menu item');
@@ -229,8 +237,6 @@ const Menu = () => {
           </Button>
         )}
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
 
       {loading ? (
         <div className="loading-container">
@@ -314,7 +320,6 @@ const Menu = () => {
         </Card>
       )}
 
-      {/* Add/Edit Modal */}
       <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
@@ -415,7 +420,6 @@ const Menu = () => {
               ))}
             </div>
           </div>
-
 
         </form>
       </Modal>

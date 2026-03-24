@@ -6,7 +6,7 @@ import Input from '../../components/common/Input';
 import Select from '../../components/common/Select';
 import Modal from '../../components/common/Modal';
 import Loading from '../../components/common/Loading';
-import Alert from '../../components/common/Alert';
+import { useToastNotifications } from '../../hooks/useToastNotifications';
 import { Search, Edit, Trash2, UserPlus, Users, Mail, Phone, Shield } from 'lucide-react';
 import Toggle from '../../components/common/Toggle';
 import './AdminUsers.css';
@@ -33,6 +33,8 @@ const AdminUsers = () => {
     isActive: true,
   });
   const [submitting, setSubmitting] = useState(false);
+
+  useToastNotifications({ error, success, setError, setSuccess });
 
   useEffect(() => {
     fetchUsers();
@@ -221,9 +223,6 @@ const AdminUsers = () => {
           Add User
         </Button>
       </div>
-
-      {error && <Alert type="error" message={error} onClose={() => setError('')} />}
-      {success && <Alert type="success" message={success} onClose={() => setSuccess('')} />}
 
       {/* Filters */}
       <Card className="filters-card">
