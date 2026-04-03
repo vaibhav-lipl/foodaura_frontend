@@ -105,7 +105,7 @@ const Header = ({ onMenuClick }) => {
 
   /* ================= FETCH WHEN OPEN ================= */
   useEffect(() => {
-    if (user && isNotificationOpen) {
+    if (user) {
       fetchNotifications();
     }
   }, [user, isNotificationOpen]);
@@ -142,7 +142,7 @@ const Header = ({ onMenuClick }) => {
                 setIsNotificationOpen(!isNotificationOpen)
               }
             >
-              <Bell size={20} />
+              <Bell size={22} className={unreadCount > 0 ? "bell-vibrate" : ""} />
               {unreadCount > 0 && (
                 <span className="notification-badge">
                   {unreadCount}

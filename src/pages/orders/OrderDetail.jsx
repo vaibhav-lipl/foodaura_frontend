@@ -164,6 +164,10 @@ const OrderDetail = () => {
                 <span className="info-label">Order Date</span>
                 <span className="info-value">{formatDateTime(order.createdAt)}</span>
               </div>
+              <div className="info-item">
+                <span className="info-label">Restaurant Name</span>
+                <span className="info-value">{order.restaurant?.name}</span>
+              </div>
             </div>
           </Card>
 

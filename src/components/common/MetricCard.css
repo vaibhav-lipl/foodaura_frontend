@@ -14,7 +14,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 6px;
   background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
   transform: scaleX(0);
   transition: transform var(--transition-normal);

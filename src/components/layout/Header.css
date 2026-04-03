@@ -160,6 +160,7 @@
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -240,13 +241,13 @@
 /* Badge */
 .notification-badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: -10px;
+  right: -10px;
   background: #ef4444;
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  padding: 2px 6px;
+  padding: 4px 8px;
   border-radius: 50px;
 }
 
@@ -338,8 +339,64 @@
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Target the bell SVG */
+.header-icon-btn svg {
+  display: inline-block;
+  transform-origin: top center;
+}
+
+/* Add animation class */
+.bell-vibrate {
+  animation: bellShake 2.0s ease-in-out infinite, bellGlow 1.5s ease-in-out infinite;
+}
+
+
+/* Keyframes for vibration */
+@keyframes bellGlow {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0px #98e9ac);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 4px #01723d);
+  }
+}
+
+@keyframes bellShake {
+  0% {
+    transform: rotate(0);
+  }
+
+  15% {
+    transform: rotate(15deg);
+  }
+
+  30% {
+    transform: rotate(-12deg);
+  }
+
+  45% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(-8deg);
+  }
+
+  75% {
+    transform: rotate(5deg);
+  }
+
+  100% {
+    transform: rotate(0);
   }
 }
