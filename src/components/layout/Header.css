@@ -263,6 +263,7 @@
   overflow: hidden;
   z-index: 1000;
   animation: fadeIn 0.2s ease-in-out;
+  border: 1px solid #a9a6a766;
 }
 
 /* Header */
@@ -272,6 +273,7 @@
   align-items: center;
   padding: 14px 16px;
   border-bottom: 1px solid #f1f1f1;
+  background: #a9a6a766;
 }
 
 .notification-header h4 {
@@ -285,6 +287,13 @@
   border: none;
   color: #2563eb;
   cursor: pointer;
+}
+
+.notification-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
 }
 
 /* List */
@@ -317,7 +326,18 @@
 .notification-message {
   font-size: 13px;
   color: #6b7280;
-  margin-bottom: 6px;
+  margin-bottom: 0px;
+
+  max-width: 275px;
+  white-space: wrap;
+  /* overflow: hidden;
+  text-overflow: ellipsis; */
+}
+
+.notification-details-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .notification-time {
@@ -331,6 +351,44 @@
   text-align: center;
   color: #9ca3af;
   font-size: 14px;
+}
+
+.notification-dropdown-footer {
+  background: #a9a6a766;
+  display: flex;
+  justify-content: space-between;
+  color: #000;
+  font-weight: 700;
+  align-items: center;
+  padding: 4px 10px;
+}
+
+.notification-dropdown-footer button.text-danger {
+  cursor: pointer;
+  color: #dc2626;
+  /* modern red (Tailwind red-600) */
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.notification-dropdown-footer button.text-danger:hover {
+  color: #b91c1c;
+  /* darker red on hover */
+  text-decoration: underline;
+}
+
+.notification-dropdown-footer button.text-info {
+  cursor: pointer;
+  color: #2563eb;
+  /* clean blue (Tailwind blue-600) */
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.notification-dropdown-footer button.text-info:hover {
+  color: #1d4ed8;
+  /* darker blue on hover */
+  text-decoration: underline;
 }
 
 /* Animation */

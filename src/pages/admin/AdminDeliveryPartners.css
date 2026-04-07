@@ -144,3 +144,9 @@
     font-size: 20px;
     cursor: pointer;
 }
+
+.details-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

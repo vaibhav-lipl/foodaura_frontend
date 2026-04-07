@@ -8,6 +8,7 @@ import {
   LogOut,
   ChevronDown,
   Trash2,
+  Delete,
 } from 'lucide-react';
 import { useAuth } from '../../store/AuthContext';
 import { authAPI } from '../../api/auth.api';
@@ -176,30 +177,66 @@ const Header = ({ onMenuClick }) => {
                         }
                       >
                         <div className="notification-content">
-                          <p className="notification-title">
-                            {notification.title}
-                          </p>
-                          <p className="notification-message">
-                            {notification.message}
-                          </p>
-                          <span className="notification-time">
-                            {new Date(
-                              notification.createdAt
-                            ).toLocaleString()}
-                          </span>
+                          <div className='notification-title-row'>
+                            <p className="notification-title">
+                              {notification.title}
+                            </p>
+
+                            <Trash2
+                              size={16}
+                              color='red'
+                              className="delete-icon"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteNotification(notification.id);
+                              }}
+                            />
+                          </div>
+                          <div className="notification-details-row">
+                            <p className="notification-message">
+                              {notification.message}
+                            </p>
+                            <span className="notification-time">
+                              {new Date(
+                                notification.createdAt
+                              ).toLocaleString()}
+                            </span>
+                          </div>
                         </div>
 
-                        <Trash2
-                          size={16}
-                          className="delete-icon"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteNotification(notification.id);
-                          }}
-                        />
                       </div>
                     ))
                   )}
+                </div>
+                <div className="notification-dropdown-footer">
+                  {/* {notifications.length > 0 && ( */}
+                    <button
+                      className="btn-link btn-sm text-danger"
+                      onClick={() => {
+                        if (window.confirm('Delete all notifications?')) {
+                          notifications.forEach((n) =>
+                            handleDeleteNotification(n.id)
+                          );
+                        }
+                      }}
+                    >
+                      Clear All
+                    </button>
+                  {/* )} */}
+                  {/* {notifications.length > 0 && ( */}
+                    <button
+                      className="btn-link btn-sm text-info"
+                      onClick={() => {
+                        notifications.forEach((n) => {
+                          if (!n.isRead) {
+                            handleNotificationClick(n);
+                          }
+                        });
+                      }}
+                    >
+                      Mark all as read
+                    </button>
+                  {/* )} */}
                 </div>
               </div>
             )}

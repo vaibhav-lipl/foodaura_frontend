@@ -131,13 +131,11 @@ const OrderDetail = () => {
   return (
     <div className="order-detail-page">
       <div className="page-header">
-        <div>
-          <Button variant="outline" onClick={() => navigate('/orders')} className="mb-4">
-            <ArrowLeft size={16} />
-            Back to Orders
-          </Button>
-          <h1 className="page-title">Order {order.orderNumber}</h1>
-        </div>
+        <Button variant="outline" onClick={() => navigate('/orders')} className="mb-4">
+          <ArrowLeft size={16} />
+          Back to Orders
+        </Button>
+        <h1 className="page-title">Order {order.orderNumber}</h1>
       </div>
 
       <div className="order-detail-grid">

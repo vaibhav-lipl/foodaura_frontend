@@ -47,6 +47,7 @@
     background: #f8fafc;
     padding: 12px;
     border-radius: 6px;
+    align-items: flex-start;
 }
 
 .info-label {

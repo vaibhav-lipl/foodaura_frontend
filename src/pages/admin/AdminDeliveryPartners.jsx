@@ -144,6 +144,7 @@ const AdminDeliveryPartners = () => {
                         </div>
 
                         <div className="restaurant-details">
+                            <div className="details-head">
                             {partner.phoneNumber && (
                                 <div className="detail-item">
                                     <Phone size={16} />
@@ -151,19 +152,22 @@ const AdminDeliveryPartners = () => {
                                 </div>
                             )}
 
+                            <Button
+                                variant="info"
+                                size="sm"
+                                onClick={() => navigate(`/admin/delivery-partners/${partner.userId}`)}
+                                >
+                                <Eye size={14} />
+                            </Button>
+
+                            </div>
+
                             {partner.email && (
                                 <div className="detail-item">
                                     <Mail size={16} />
                                     <span>{partner.email}</span>
                                 </div>
                             )}
-                            <Button
-                                variant="info"
-                                size="sm"
-                                onClick={() => navigate(`/admin/delivery-partners/${partner.userId}`)}
-                                >
-                                <Eye size={16} /> Details
-                            </Button>
                         </div>
                         <div className="restaurant-actions">
                             <Select
