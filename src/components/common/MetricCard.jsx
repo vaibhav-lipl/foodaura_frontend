@@ -13,18 +13,26 @@ const MetricCard = ({ title, value, icon: Icon, trend, className = '', color = '
   const content = (
     <div className={cardClass}>
       <div className="metric-card-header">
-        <div className="metric-card-icon">
-          {Icon && <Icon size={24} />}
-        </div>
-        {trend && (
-          <div className={`metric-card-trend ${trend.positive ? 'positive' : 'negative'}`}>
-            {trend.positive ? '↑' : '↓'} {trend.value}
-          </div>
-        )}
+        <p className="metric-card-title">{title}</p>
+
+
       </div>
       <div className="metric-card-body">
         <h3 className="metric-card-value">{value}</h3>
-        <p className="metric-card-title">{title}</p>
+
+
+        <div className="metric-card-body-trend-container">
+          <div className="metric-card-icon">
+            {Icon && <Icon size={24} />}
+          </div>
+          {/* {trend && (
+            <div className={`metric-card-trend ${trend.positive ? 'positive' : 'negative'}`}>
+              {trend.positive ? '↑' : '↓'} {trend.value}
+            </div>
+          )} */}
+        </div>
+
+
       </div>
     </div>
   );

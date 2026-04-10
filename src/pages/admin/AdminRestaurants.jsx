@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { adminAPI } from '../../api/admin.api';
-import Card from '../../components/common/Card';
+import Cards from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Select from '../../components/common/Select';
 import StatusBadge from '../../components/common/StatusBadge';
 import Loading from '../../components/common/Loading';
 import { useToastNotifications } from '../../hooks/useToastNotifications';
-import { Search, Store, MapPin, Phone, Mail, ChefHat, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Search, Store, MapPin, Phone, Mail, ChefHat, ToggleLeft, ToggleRight, NotebookPen } from 'lucide-react';
 import './AdminRestaurants.css';
 
 const AdminRestaurants = () => {
@@ -91,7 +91,17 @@ const AdminRestaurants = () => {
       </div>
     );
   }
-
+  const restaurant = {
+    name: "Food Aura",
+    description: "Best multi cuisine restaurant with amazing taste.",
+    kitchenType: "Multi Cuisine",
+    city: "Indore",
+    isOpen: true,
+    isActive: true,
+    phone: "+91 9876543210",
+    email: "foodaura@gmail.com",
+    image: "https://source.unsplash.com/400x300/?restaurant,food"
+  };
   return (
     <div className="admin-restaurants-page">
       <div className="page-header">
@@ -102,7 +112,7 @@ const AdminRestaurants = () => {
       </div>
 
       {/* Filters */}
-      <Card className="filters-card">
+      <Cards className="filters-card">
         <div className="filters-grid">
           <div className="filter-group">
             <Input
@@ -132,17 +142,18 @@ const AdminRestaurants = () => {
             />
           </div>
         </div>
-      </Card>
+      </Cards>
 
       {/* Restaurants Grid */}
       <div className="restaurants-grid">
         {restaurants.map((restaurant) => (
-          <Card key={restaurant.id} className="restaurant-card">
+          <Cards key={restaurant.id} className="restaurant-card">
             <div className="restaurant-card-header">
               <div className="restaurant-info">
-                <div className="restaurant-icon">
+                {/* <div className="restaurant-icon">
                   <Store size={24} />
-                </div>
+                </div> */}
+                <img src={restaurant.imageUrl ? restaurant.imageUrl : '/foodaura.png' } alt={restaurant.name} className='restrorent_image_small' />
                 <div>
                   <h3 className="restaurant-name">{restaurant.name}</h3>
                   {restaurant.cuisineType && (
@@ -154,20 +165,27 @@ const AdminRestaurants = () => {
                 </div>
               </div>
               <div className="restaurant-statuses">
-                <StatusBadge 
+                <StatusBadge
                   status={restaurant.isOpen}
                   type="restaurant"
                 />
               </div>
             </div>
 
-            {restaurant.description && (
-              <p className="restaurant-description">{restaurant.description}</p>
-            )}
 
             <div className="restaurant-details">
+              {restaurant.description && (
+                <div className="detail-item-card">
+                  <NotebookPen size={16} />
+
+                  <p className="restaurant-description">{restaurant.description}</p>
+
+                </div>
+              )}
+
+
               {restaurant.address && (
-                <div className="detail-item">
+                <div className="detail-item-card">
                   <MapPin size={16} />
                   <span>
                     {restaurant.address}, {restaurant.city}, {restaurant.state} {restaurant.zipCode}
@@ -175,13 +193,13 @@ const AdminRestaurants = () => {
                 </div>
               )}
               {restaurant.phone && (
-                <div className="detail-item">
+                <div className="detail-item-card">
                   <Phone size={16} />
                   <span>{restaurant.phone}</span>
                 </div>
               )}
               {restaurant.email && (
-                <div className="detail-item">
+                <div className="detail-item-card">
                   <Mail size={16} />
                   <span>{restaurant.email}</span>
                 </div>
@@ -207,18 +225,20 @@ const AdminRestaurants = () => {
                 )}
               </Button>
             </div>
-          </Card>
+          </Cards>
+
+
         ))}
       </div>
 
       {restaurants.length === 0 && (
-        <Card>
+        <Cards>
           <div className="empty-state">
             <Store size={48} />
             <h3>No restaurants found</h3>
             <p>Try adjusting your filters.</p>
           </div>
-        </Card>
+        </Cards>
       )}
     </div>
   );

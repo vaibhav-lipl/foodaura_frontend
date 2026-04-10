@@ -9,6 +9,7 @@ import Loading from '../../components/common/Loading';
 import { useToastNotifications } from '../../hooks/useToastNotifications';
 import { Search, Edit, Trash2, UserPlus, Users, Mail, Phone, Shield } from 'lucide-react';
 import Toggle from '../../components/common/Toggle';
+import { confirmDelete, showDeleteSuccess } from '../../utils/sweetAlert';
 import './AdminUsers.css';
 
 const AdminUsers = () => {
@@ -160,7 +161,12 @@ const AdminUsers = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this user?')) {
+    const isConfirmed = await confirmDelete({
+      text: 'This user account will be permanently removed from the system.',
+      confirmButtonText: 'Yes, delete user',
+    });
+
+    if (!isConfirmed) {
       return;
     }
 
@@ -168,8 +174,10 @@ const AdminUsers = () => {
       setError('');
       const response = await adminAPI.deleteUser(id);
       if (response.success) {
-        setSuccess('User deleted successfully');
-        fetchUsers();
+        await fetchUsers();
+        await showDeleteSuccess({
+          text: 'The user has been deleted successfully.',
+        });
       } else {
         setError(response.message || 'Failed to delete user');
       }
@@ -412,4 +420,3 @@ const AdminUsers = () => {
 };
 
 export default AdminUsers;
-

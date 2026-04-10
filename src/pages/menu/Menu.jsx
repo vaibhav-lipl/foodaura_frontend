@@ -13,6 +13,7 @@ import Loading from '../../components/common/Loading';
 import { useToastNotifications } from '../../hooks/useToastNotifications';
 import Toggle from '../../components/common/Toggle';
 import { formatCurrency } from '../../utils/format';
+import { confirmDelete, showDeleteSuccess } from '../../utils/sweetAlert';
 import { useAuth } from '../../store/AuthContext';
 import './Menu.css';
 
@@ -184,17 +185,23 @@ const Menu = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this menu item?')) {
+    const isConfirmed = await confirmDelete({
+      text: 'This menu item will be removed from your restaurant menu.',
+      confirmButtonText: 'Yes, delete menu item',
+    });
+
+    if (!isConfirmed) {
       return;
     }
 
     try {
       setError('');
-      setSuccess('');
       const response = await menuAPI.deleteMenuItem(id);
       if (response.success) {
-        setSuccess('Menu item deleted successfully');
         await fetchMenuItems();
+        await showDeleteSuccess({
+          text: 'The menu item has been deleted successfully.',
+        });
       } else {
         setError('Failed to delete menu item');
       }

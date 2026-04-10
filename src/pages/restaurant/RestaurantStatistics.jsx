@@ -88,18 +88,18 @@ const RestaurantStatistics = () => {
 
             <Card>
               <h3>Total Revenue</h3>
-              <p className="stat-value">₹ {statistics.summary.totalRevenue}</p>
+              <p className="stat-value">₹ {Number(statistics.summary.totalRevenue).toFixed(2)}</p>
             </Card>
 
             <Card>
               <h3>Net Earnings</h3>
-              <p className="stat-value">₹ {statistics.summary.netEarnings}</p>
+              <p className="stat-value">₹ {Number(statistics.summary.netEarnings).toFixed(2)}</p>
             </Card>
 
             <Card>
               <h3>Avg Order Value</h3>
               <p className="stat-value">
-                ₹ {statistics.summary.avgOrderValue?.toFixed(2)}
+                ₹ {Number(statistics.summary.avgOrderValue).toFixed(2)}
               </p>
             </Card>
           </div>

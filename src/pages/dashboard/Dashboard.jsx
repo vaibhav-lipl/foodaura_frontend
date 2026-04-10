@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DollarSign, TrendingUp, ShoppingCart, ArrowRight } from 'lucide-react';
+import { IndianRupee, TrendingUp, ShoppingCart, ArrowRight } from 'lucide-react';
 import { dashboardAPI } from '../../api/dashboard.api';
 import MetricCard from '../../components/common/MetricCard';
 import Card from '../../components/common/Card';
@@ -120,7 +120,7 @@ const Dashboard = () => {
         <MetricCard
           title="Today's Sales"
           value={formatCurrency(todayStats?.sales || 0)}
-          icon={DollarSign}
+          icon={IndianRupee}
           color="primary"
           className='text-center'
         />

@@ -40,11 +40,11 @@ const RestaurantProfile = () => {
       setLoading(true);
       setError('');
       const response = await restaurantAPI.getProfile();
-      
+
       // Handle different response structures
       // The API might return: { success: true, data: {...} } or just the data object
       let profile = null;
-      
+
       if (response && typeof response === 'object') {
         // Check if response has success and data properties
         if (response.success !== undefined && response.data) {
@@ -58,7 +58,7 @@ const RestaurantProfile = () => {
           profile = response.data.restaurant || response.data;
         }
       }
-      
+
       if (profile) {
         setFormData({
           name: profile.name || '',
@@ -103,6 +103,13 @@ const RestaurantProfile = () => {
       const response = await restaurantAPI.updateProfile(formData, restaurantImage);
       if (response.success) {
         setSuccess('Restaurant profile updated successfully');
+
+        // Scroll to top smoothly
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+
         // Update current image URL if new image was uploaded
         if (response.data?.restaurant?.imageUrl) {
           setCurrentImageUrl(response.data.restaurant.imageUrl);

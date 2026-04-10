@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { IndianRupee, ShoppingCart, Star, MessageSquare } from 'lucide-react';
 import { statisticsAPI } from '../../api/statistics.api';
 import Card from '../../components/common/Card';
 import MetricCard from '../../components/common/MetricCard';
@@ -117,27 +118,27 @@ const Statistics = () => {
           <MetricCard
             title="Total Earnings"
             value={formatCurrency(summary.totalEarnings || 0)}
-            icon={<span className="metric-icon">💵</span>}
+            icon={IndianRupee}
           />
           <MetricCard
             title="Total Sales"
             value={formatCurrency(summary.totalSales || 0)}
-            icon={<span className="metric-icon">💰</span>}
+            icon={IndianRupee}
           />
           <MetricCard
             title="Total Orders"
             value={summary.totalOrders || 0}
-            icon={<span className="metric-icon">📦</span>}
+            icon={ShoppingCart}
           />
           <MetricCard
             title="Average Rating"
             value={summary.averageRating ? summary.averageRating.toFixed(1) : '0.0'}
-            icon={<span className="metric-icon">⭐</span>}
+            icon={Star}
           />
           <MetricCard
             title="Total Reviews"
             value={summary.totalReviews || 0}
-            icon={<span className="metric-icon">💬</span>}
+            icon={MessageSquare}
           />
         </div>
       )}

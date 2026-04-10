@@ -8,10 +8,10 @@ import {
   LogOut,
   ChevronDown,
   Trash2,
-  Delete,
 } from 'lucide-react';
 import { useAuth } from '../../store/AuthContext';
 import { authAPI } from '../../api/auth.api';
+import { confirmDelete, showDeleteSuccess } from '../../utils/sweetAlert';
 import './Header.css';
 
 const Header = ({ onMenuClick }) => {
@@ -71,6 +71,15 @@ const Header = ({ onMenuClick }) => {
 
   /* ================= DELETE ================= */
   const handleDeleteNotification = async (id) => {
+    const isConfirmed = await confirmDelete({
+      text: 'This notification will be removed from your list.',
+      confirmButtonText: 'Yes, delete notification',
+    });
+
+    if (!isConfirmed) {
+      return false;
+    }
+
     try {
       const response = await authAPI.deleteNotification(id);
 
@@ -78,9 +87,41 @@ const Header = ({ onMenuClick }) => {
         setNotifications((prev) =>
           prev.filter((n) => n.id !== id)
         );
+        await showDeleteSuccess({
+          text: 'The notification has been deleted successfully.',
+        });
+        return true;
       }
     } catch (error) {
       console.error('Delete error:', error);
+    }
+
+    return false;
+  };
+
+  const handleClearAllNotifications = async () => {
+    if (notifications.length === 0) {
+      return;
+    }
+
+    const isConfirmed = await confirmDelete({
+      text: 'All notifications will be permanently cleared from your list.',
+      confirmButtonText: 'Yes, clear all',
+    });
+
+    if (!isConfirmed) {
+      return;
+    }
+
+    try {
+      const notificationIds = notifications.map((notification) => notification.id);
+      await Promise.all(notificationIds.map((id) => authAPI.deleteNotification(id)));
+      setNotifications([]);
+      await showDeleteSuccess({
+        text: 'All notifications have been cleared successfully.',
+      });
+    } catch (error) {
+      console.error('Clear all notifications error:', error);
     }
   };
 
@@ -212,13 +253,7 @@ const Header = ({ onMenuClick }) => {
                   {/* {notifications.length > 0 && ( */}
                     <button
                       className="btn-link btn-sm text-danger"
-                      onClick={() => {
-                        if (window.confirm('Delete all notifications?')) {
-                          notifications.forEach((n) =>
-                            handleDeleteNotification(n.id)
-                          );
-                        }
-                      }}
+                      onClick={handleClearAllNotifications}
                     >
                       Clear All
                     </button>

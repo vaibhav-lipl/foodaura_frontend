@@ -33,6 +33,7 @@
 
 .restaurant-info {
   display: flex;
+  align-items: center;
   gap: var(--spacing-md);
   flex: 1;
 }
@@ -74,32 +75,35 @@
 .restaurant-description {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 16px;
   margin: 0;
 }
 
 .restaurant-details {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: 12px;
   padding: var(--spacing-md);
   background: var(--bg-secondary);
   border-radius: var(--radius-md);
+  margin-top: 10px;
 }
 
-.detail-item {
+.detail-item-card {
   display: flex;
-  align-items: center;
+  align-items: start ;
   gap: var(--spacing-xs);
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
 }
 
-.detail-item svg {
+.detail-item-card svg {
   color: var(--text-tertiary);
   flex-shrink: 0;
 }
-
+.detail-item-card span {
+  line-height: 16px;
+}
 .restaurant-actions {
   display: flex;
   gap: var(--spacing-sm);
@@ -108,3 +112,9 @@
   border-top: 1px solid var(--border-light);
 }
 
+.restrorent_image_small{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}

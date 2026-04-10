@@ -18,6 +18,7 @@ import Textarea from '../../components/common/Textarea';
 import Modal from '../../components/common/Modal';
 import Loading from '../../components/common/Loading';
 import { useToastNotifications } from '../../hooks/useToastNotifications';
+import { confirmDelete, showDeleteSuccess } from '../../utils/sweetAlert';
 import './AdminFaqs.css';
 
 const NEW_MODULE_VALUE = '__new__';
@@ -352,7 +353,12 @@ const AdminFaqs = () => {
   };
 
   const handleDeleteFaq = async (faqId) => {
-    if (!window.confirm('Are you sure you want to delete this FAQ?')) {
+    const isConfirmed = await confirmDelete({
+      text: 'This FAQ entry will be removed and can no longer be shown to users.',
+      confirmButtonText: 'Yes, delete FAQ',
+    });
+
+    if (!isConfirmed) {
       return;
     }
 
@@ -360,8 +366,10 @@ const AdminFaqs = () => {
       setError('');
       const response = await adminAPI.deleteFaq(faqId);
       if (response.success) {
-        setSuccess('FAQ deleted successfully');
         await fetchFaqs();
+        await showDeleteSuccess({
+          text: 'The FAQ has been deleted successfully.',
+        });
       } else {
         setError(response.message || 'Failed to delete FAQ');
       }
@@ -371,7 +379,12 @@ const AdminFaqs = () => {
   };
 
   const handleDeleteModule = async (moduleId) => {
-    if (!window.confirm('Are you sure you want to delete this FAQ module?')) {
+    const isConfirmed = await confirmDelete({
+      text: 'This FAQ module and its organization will be removed from the admin panel.',
+      confirmButtonText: 'Yes, delete module',
+    });
+
+    if (!isConfirmed) {
       return;
     }
 
@@ -379,11 +392,13 @@ const AdminFaqs = () => {
       setError('');
       const response = await adminAPI.deleteFaqModule(moduleId);
       if (response.success) {
-        setSuccess('FAQ module deleted successfully');
         if (filters.moduleId === String(moduleId)) {
           setFilters((prev) => ({ ...prev, moduleId: '' }));
         }
         await Promise.all([fetchModules(), fetchFaqs()]);
+        await showDeleteSuccess({
+          text: 'The FAQ module has been deleted successfully.',
+        });
       } else {
         setError(response.message || 'Failed to delete FAQ module');
       }

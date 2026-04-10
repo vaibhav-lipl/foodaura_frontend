@@ -1,0 +1,98 @@
+.theme-swal-popup {
+  width: min(32rem, calc(100vw - 2rem));
+  padding: 1.75rem;
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(249, 168, 212, 0.28);
+  background:
+    radial-gradient(circle at top, rgba(252, 231, 243, 0.9), rgba(255, 255, 255, 0) 45%),
+    var(--bg-primary);
+  box-shadow: 0 24px 60px -24px rgba(15, 23, 42, 0.35);
+  font-family: var(--font-sans);
+}
+
+.theme-swal-title {
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+.theme-swal-text {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.theme-swal-icon.swal2-warning {
+  border-color: rgba(245, 158, 11, 0.28);
+  color: var(--warning-600);
+}
+
+.theme-swal-icon.swal2-success {
+  border-color: rgba(16, 185, 129, 0.24);
+}
+
+.theme-swal-actions {
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.theme-swal-confirm,
+.theme-swal-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 9rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-fast);
+}
+
+.theme-swal-confirm {
+  background: linear-gradient(135deg, var(--danger-500) 0%, var(--danger-600) 100%);
+  color: var(--text-inverse);
+  box-shadow: 0 10px 20px -14px rgba(244, 63, 94, 0.9);
+}
+
+.theme-swal-confirm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px -16px rgba(244, 63, 94, 0.95);
+}
+
+.theme-swal-cancel {
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border-color: var(--border-medium);
+}
+
+.theme-swal-cancel:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-dark);
+}
+
+div:where(.swal2-container) {
+  backdrop-filter: blur(6px);
+  background: rgba(15, 23, 42, 0.42);
+}
+
+@media (max-width: 640px) {
+  .theme-swal-popup {
+    padding: 1.25rem;
+  }
+
+  .theme-swal-actions {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+
+  .theme-swal-confirm,
+  .theme-swal-cancel {
+    width: 100%;
+    margin: 0;
+  }
+}
